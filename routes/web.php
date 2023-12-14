@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/admin', function () {
+    $data = \App\Models\Category::getList();
+    return view('dashboard', ['data'=>$data]);
 });
 
 Route::get('/student', function () {

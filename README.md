@@ -13,6 +13,9 @@ About
 
 ####Active menu
 ````
+#nested menu
+request()->is('companies/*')
 
+#single menu
 {{ url()->current() == url('/') ? 'active' : '' }}
 ````

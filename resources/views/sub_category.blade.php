@@ -9,6 +9,7 @@
 </head>
 <body>
 <center>
+    {{ dd(request()->is('category')) }}
     <h1>hello from student page</h1>
 </center>
 </body>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Starter</title>
+    <title>miniPOS</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -126,7 +126,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li class="nav-item">
-                        <a href="{{ url('/admin') }}" class="nav-link {{ url()->current() == url('/') ? 'active' : '' }}">
+                        <a href="{{ url('/admin') }}" class="nav-link {{ url()->current() == url('/admin') ? 'active' : '' }}">
                             <i class="nav-icon fab fa-windows"></i>
                             <p>Dashboard</p>
                         </a>

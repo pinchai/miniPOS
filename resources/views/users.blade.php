@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Customer</h1>
+                        <h1 class="m-0">User</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Customer</li>
+                            <li class="breadcrumb-item active">User</li>
                         </ol>
                     </div>
                 </div>
@@ -20,16 +20,41 @@
                 <div class="col-6">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" action="create_category">
+                            <form method="post" action="{{ url('/admin/users/create') }}">
+                                @csrf
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput">Name</label>
-                                    <input required type="text" class="form-control" id="formGroupExampleInput"
-                                           placeholder="Enter customer name">
+                                    <label for="formGroupExampleInput">User Name</label>
+                                    <input
+                                        name="name"
+                                        required
+                                        type="text"
+                                        class="form-control"
+                                        id="formGroupExampleInput"
+                                        placeholder="Enter user name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput2">Description</label>
-                                    <textarea rows="3" class="form-control" id="formGroupExampleInput2"
-                                              placeholder="Enter customer name"></textarea>
+                                    <label>Email</label>
+                                    <input
+                                        name="email"
+                                        required
+                                        type="email"
+                                        class="form-control"
+                                        id="Email"
+                                        placeholder="Enter Email"
+
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input
+                                        name="password"
+                                        required
+                                        type="password"
+                                        class="form-control"
+                                        id="password"
+                                        placeholder="Enter password"
+                                        autocomplete="off"
+                                    >
                                 </div>
                                 <button type="reset" class="btn btn-secondary float-left">
                                     <i class="fas fa-times"></i>
@@ -52,7 +77,7 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Name</th>
-                                        <th>Description</th>
+                                        <th>E-mail</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -61,7 +86,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->name }}</td>
-                                            <td>Drink description</td>
+                                            <td>{{ $item->email }}</td>
                                             <td>
                                                 <button>
                                                     <i class="text-danger far fa-trash-alt"></i>

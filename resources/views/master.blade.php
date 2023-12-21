@@ -24,6 +24,9 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
+                <a href="{{ url('/logout') }}" class="nav-link">Logout</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{ url('/') }}" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
@@ -123,7 +126,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li class="nav-item">
-                        <a href="{{ url('/') }}" class="nav-link {{ url()->current() == url('/') ? 'active' : '' }}">
+                        <a href="{{ url('/admin') }}" class="nav-link {{ url()->current() == url('/') ? 'active' : '' }}">
                             <i class="nav-icon fab fa-windows"></i>
                             <p>Dashboard</p>
                         </a>
@@ -154,25 +157,25 @@
                     </li>
                     @endif
                     <li class="nav-item">
-                        <a href="{{ url('/category') }}" class="nav-link {{ url()->current() == url('/category') ? 'active' : '' }}">
+                        <a href="{{ url('/admin/category') }}" class="nav-link {{ url()->current() == url('/admin/category') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-stream"></i>
                             <p>Category</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/product') }}" class="nav-link {{ url()->current() == url('/product') ? 'active' : '' }}">
+                        <a href="{{ url('/admin/product') }}" class="nav-link {{ url()->current() == url('/admin/product') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cubes"></i>
                             <p>Product</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/customer') }}" class="nav-link {{ url()->current() == url('/customer') ? 'active' : '' }}">
+                        <a href="{{ url('/admin/customer') }}" class="nav-link {{ url()->current() == url('/admin/customer') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-users"></i>
                             <p>Customer</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/users') }}" class="nav-link {{ url()->current() == url('/users') ? 'active' : '' }}">
+                        <a href="{{ url('/admin/users') }}" class="nav-link {{ url()->current() == url('/admin/users') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user"></i>
                             <p>Users</p>
                         </a>

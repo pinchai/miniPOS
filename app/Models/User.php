@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -42,4 +43,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //setData
+    public function setData($data)
+    {
+        $this->name = $data['name'];
+        $this->email = $data['email'];
+        isset($data['password']) && $this->password = Hash::make($data['password']);
+        $this->branch_id = $data['branch_id'];
+        $this->role_id = $data['role_id'];
+        $this->user_type_id = $data['user_type_id'];
+        $this->status = $data['status'];
+    }
 }

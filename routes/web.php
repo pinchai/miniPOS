@@ -16,26 +16,32 @@ use Illuminate\Support\Facades\Route;
 //    return view('student');
 //});
 
-Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
+//login
+Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
+Route::post('/do_login', [App\Http\Controllers\LoginController::class, 'do_login'])->name('do_login');
 
-Route::get('/category', function () {
-    $data = [];
-    return view('category', ['data'=>$data]);
+Route::middleware('auth')->group(function () {
+    //protect rout block
+    Route::get('/admin', [\App\Http\Controllers\DashboardController::class, 'index']);
+    Route::get('/admin/category', function () {
+        $data = [];
+        return view('category', ['data'=>$data]);
+    });
+    Route::get('/admin/product', function () {
+        $data = [];
+        return view('product', ['data'=>$data]);
+    });
+    Route::get('/admin/customer', function () {
+        $data = [];
+        return view('customer', ['data'=>$data]);
+    });
+
+
+    Route::get('/admin/users', [\App\Http\Controllers\UsersController::class, 'index']);
+    Route::post('/admin/users/create', [\App\Http\Controllers\UsersController::class, 'create']);
+
+
+    //logout
+    Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 });
-
-Route::get('/product', function () {
-    $data = [];
-    return view('product', ['data'=>$data]);
-});
-
-Route::get('/customer', function () {
-    $data = [];
-    return view('customer', ['data'=>$data]);
-});
-
-Route::get('/users', function () {
-    $data = [];
-    return view('users', ['data'=>$data]);
-});
-
 

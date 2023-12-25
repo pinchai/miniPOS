@@ -27,8 +27,8 @@ class CategoryController extends Controller
     }
 
     public function create(Request $request){
-
         $request->validate([
+            'name' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $category = new Category();

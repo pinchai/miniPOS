@@ -14,10 +14,6 @@ class Category extends Model
     const NAME = 'name';
     const DESCRIPTION = 'description';
 
-    public static function getList(){
-        return self::orderBy('id', 'desc')->get();
-    }
-
     public function setData($data)
     {
         $this->{self::NAME} = $data[self::NAME];

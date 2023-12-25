@@ -22,6 +22,7 @@ Route::post('/do_login', [App\Http\Controllers\LoginController::class, 'do_login
 
 Route::middleware('auth')->group(function () {
     //protect rout block
+    Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
     Route::get('/admin', [\App\Http\Controllers\DashboardController::class, 'index']);
     Route::get('/admin/category', function () {
         $data = [];
@@ -36,14 +37,8 @@ Route::middleware('auth')->group(function () {
         return view('customer', ['data'=>$data]);
     });
 
-
-    Route::get('/admin/users', [\App\Http\Controllers\UsersController::class, 'index'])->name('user');
-    Route::get('/admin/users/index_create', [\App\Http\Controllers\UsersController::class, 'index_create'])
-        ->name('create_user');
-    Route::get('/admin/users/confirm_delete', [\App\Http\Controllers\UsersController::class, 'confirm_delete'])
-        ->name('confirm_delete');
-    Route::post('/admin/users/create', [\App\Http\Controllers\UsersController::class, 'create']);
-
+    include 'admin/category.php';
+    include 'admin/users.php';
 
     //logout
     Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');

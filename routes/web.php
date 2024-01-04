@@ -12,20 +12,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/home', function () {
-
-    return view('front.home');
-});
-
-
-
 //login
 Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
 Route::post('/do_login', [App\Http\Controllers\LoginController::class, 'do_login'])->name('do_login');
-
 Route::middleware('auth')->group(function () {
     //protect rout block
-    Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
+//    Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
     Route::get('/admin', [\App\Http\Controllers\DashboardController::class, 'index']);
     Route::get('/admin/category', function () {
         $data = [];
@@ -47,3 +39,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 });
 
+//* Front Block *//
+
+include 'front/home.php';

@@ -6,13 +6,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Create Category</h1>
+                        <h1 class="m-0">Update Category</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('category') }}">Category List</a></li>
-                            <li class="breadcrumb-item active">Create Category</li>
+                            <li class="breadcrumb-item active">Update Category</li>
                         </ol>
                     </div>
                 </div>
@@ -21,20 +21,21 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" action="{{ route('create_category') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('update_category') }}" enctype="multipart/form-data">
                                 @csrf
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
+                                <div>
+                                    <center>
+                                        <img
+                                            style="width: 20%"
+                                            class="img-fluid img-thumbnail"
+                                            src="{{ asset('images').'/'.$data->image }}"
+                                        >
+                                    </center>
+                                </div>
+                                <input type="hidden" value="{{ $data->id }}" name="id">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput">Category Image</label>
-                                    <input type="file" name="image" class="form-control" />
+                                    <label for="formGroupExampleInput">New Category Image</label>
+                                    <input type="file" name="image" class="form-control"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Category Name</label>
@@ -44,7 +45,9 @@
                                         type="text"
                                         class="form-control"
                                         id="formGroupExampleInput"
-                                        placeholder="Enter category name">
+                                        placeholder="Enter category name"
+                                        value="{{ $data->name }}"
+                                    >
                                 </div>
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Description</label>
@@ -54,7 +57,7 @@
                                         class="form-control"
                                         id="formGroupExampleInput"
                                         placeholder="Enter category description"
-                                    ></textarea>
+                                    >{{ $data->description }}</textarea>
                                 </div>
                                 <button type="reset" class="btn btn-secondary float-left">
                                     <i class="fas fa-times"></i>
@@ -62,7 +65,7 @@
                                 </button>
                                 <button type="submit" class="btn btn-primary float-right">
                                     <i class="far fa-save"></i>
-                                    Save
+                                    Update
                                 </button>
                             </form>
                         </div>

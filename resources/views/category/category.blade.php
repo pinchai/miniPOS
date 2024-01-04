@@ -71,9 +71,11 @@
                                                         <i class="text-danger far fa-trash-alt"></i>
                                                     </button>
                                                 </a>
-                                                <button>
-                                                    <i class="text-success fas fa-edit"></i>
-                                                </button>
+                                                <a href="{{ route('index_update_category').'?id='. $item->id}}">
+                                                    <button>
+                                                        <i class="text-success fas fa-edit"></i>
+                                                    </button>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

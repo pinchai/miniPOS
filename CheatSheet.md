@@ -1,93 +1,93 @@
-### Project commands
+### 🪂 Project commands
 
 ````
-// New project
+//New project
 $ laravel new projectName
 
-// Launch server/project
+//Launch server/project
 $ php artisan serve
 
-// commands list
+//commands list
 $ php artisan list
 
-// command help
+//command help
 $ php artisan help migrate
 
-// Laravel console
+//Laravel console
 $ php artisan tinker
 
-// Route list
+//Route list
 $ php artisan route:list
 ````
 
-### Commons commands
+###⭐️️Commons commands⭐
 
 ````
-// Database migration
+//Database migration
 $ php artisan migrate
 
-// Data seed
+//Data seed
 $ php artisan db:seed
 
-// Create table migration
+//Create table migration
 $ php artisan make:migration create_products_table
 
-// Create from model with options: 
-// -m (migration), -c (controller), -r (resource controllers), -f (factory), -s (seed)
+//Create from model with options: 
+//-m (migration), -c (controller), -r (resource controllers), -f (factory), -s (seed)
 $ php artisan make:model Product -mcf
 
-// Create a controller
+//Create a controller
 $ php artisan make:controller ProductsController
 
-// Update table migration
+//Update table migration
 $ php artisan make:migration add_date_to_blogposts_table
 
-// Rollback latest migration
+//Rollback latest migration
 php artisan migrate:rollback
 
-// Rollback all migrations
+//Rollback all migrations
 php artisan migrate:reset
 
-// Rollback all and re-migrate
+//Rollback all and re-migrate
 php artisan migrate:refresh
 
-// Rollback all, re-migrate and seed
+//Rollback all, re-migrate and seed
 php artisan migrate:refresh --seed
 ````
 
-#### Create and update data tables (with migrations)
+#### 📋 Create and update data tables (with migrations)
 
 ````
-// Create data table 
+//Create data table 
 $ php artisan make:migration create_products_table
 
-// Create table(migration exemple)
+//Create table(migration exemple)
 Schema::create('products', function (Blueprint $table) {
-    // auto-increment primary key
+    //auto-increment primary key
     $table->id();
-    // created_at and updated_at
+    //created_at and updated_at
     $table->timestamps();
-    // Unique constraint
+    //Unique constraint
     $table->string('modelNo')->unique();
-    // Not required
+    //Not required
     $table->text('description')->nullable();
-    // Default value
+    //Default value
     $table->boolean('isActive')->default(true); 
-    // Index
+    //Index
     $table->index(['account_id', 'created_at']);
-    // Foreign Key relation
+    //Foreign Key relation
     $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
 });
 
-// Update table (migration exemple)
+//Update table (migration exemple)
 $ php artisan make:migration add_comment_to_products_table
 
-// up()
+//up()
 Schema::table('users', function (Blueprint $table) {
     $table->text('comment');
 });
 
-// down()
+//down()
 Schema::table('users', function (Blueprint $table) {
     $table->dropColumn('comment');
 });
@@ -97,48 +97,48 @@ Schema::table('users', function (Blueprint $table) {
 #### Models
 
 ````
-// Model mass assignment list exclude attributes
-protected $guarded = []; // empty == All
+//Model mass assignment list exclude attributes
+protected $guarded = []; //empty == All
 
-// Or list included attributes
+//Or list included attributes
 protected $fillable = ['name', 'email', 'password',];
 
 
-// One to Many relationship (posts with many comments)
+//One to Many relationship (posts with many comments)
 public function comments() 
 {
     return $this->hasMany(Comment:class); 
 }
 
-// One to Many relationship (comments with one post) 
+//One to Many relationship (comments with one post) 
 public function post() 
 {                            
     return $this->belongTo(Post::class); 
 }
 
-// One to one relationship (Author with one profile)
+//One to one relationship (Author with one profile)
 public function profile() 
 {
     return $this->hasOne(Profile::class); 
 }
 
-// One to one relationship (Profile with one Author) 
+//One to one relationship (Profile with one Author) 
 public function author() 
 {                            
     return $this->belongTo(Author::class); 
 }
 
-// Many to Many relationship
-// 3 tables (posts, tags and post_tag)
-// post_tag (post_id, tag_id)
+//Many to Many relationship
+//3 tables (posts, tags and post_tag)
+//post_tag (post_id, tag_id)
 
-// in Tag model...
+//in Tag model...
 public function posts()
     {
         return $this->belongsToMany(Post::class);
     }
 
-// in Post model...
+//in Post model...
 public function tags()
     {
         return $this->belongsToMany(Tag::class);
@@ -148,20 +148,20 @@ public function tags()
 #### Factory
 
 ````
-// ex: database/factories/ProductFactory.php
+//ex: database/factories/ProductFactory.php
 public function definition() {
     return [
         'name' => $this->faker->text(20),
         'price' => $this->faker->numberBetween(10, 10000),
     ];
 }
-// all fakers options : https://github.com/fzaninotto/Faker
+//all fakers options : https://github.com/fzaninotto/Faker
 ````
 
 #### Seed
 
 ````
-// ex: database/seeders/DatabaseSeeder.php
+//ex: database/seeders/DatabaseSeeder.php
 public function run() {
     Product::factory(10)->create();
 }
@@ -171,119 +171,119 @@ public function run() {
 
 ````
 $ php artisan db:seed
-// or with migration
+//or with migration
 $ php artisan migrate --seed
 ````
 
 #### Eloquent ORM
 
 ````
-// New 
+//New 
 $flight = new Flight;
 $flight->name = $request->name;
 $flight->save();
 
-// Update 
+//Update 
 $flight = Flight::find(1);
 $flight->name = 'New Flight Name';
 $flight->save();
 
-// Create
+//Create
 $user = User::create(['first_name' => 'Taylor','last_name' => 'Otwell']); 
 
-// Update All:  
+//Update All:  
 Flight::where('active', 1)->update(['delayed' => 1]);
 
-// Delete 
+//Delete 
 $current_user = User::Find(1)
 $current_user.delete(); 
 
-// Delete by id:  
+//Delete by id:  
 User::destroy(1);
 
-// Delete all
+//Delete all
 $deletedRows = Flight::where('active', 0)->delete();
 
-// Get All 
+//Get All 
 $items = Item::all(). 
 
-// Find one by primary key
+//Find one by primary key
 $flight = Flight::find(1);
 
-// display 404 if not found
+//display 404 if not found
 $model = Flight::findOrFail(1); 
 
-// Get last entry
+//Get last entry
 $items = Item::latest()->get()
 
-// Chain 
+//Chain 
 $flights = App\Flight::where('active', 1)->orderBy('name', 'desc')->take(10)->get();
 
-// Where
+//Where
 Todo::where('id', $id)->firstOrFail()  
 
-// Like 
+//Like 
 Todos::where('name', 'like', '%' . $my . '%')->get()
 
-// Or where
+//Or where
 Todos::where('name', 'mike')->orWhere('title', '=', 'Admin')->get();
 
-// Count
+//Count
 $count = Flight::where('active', 1)->count();
 
-// Sum
+//Sum
 $sum = Flight::where('active', 1)->sum('price');
 
-// Contain?
+//Contain?
 if ($project->$users->contains('mike')) 
 ````
 
 #### Routes
 
 ````
-// Basic route closure
+//Basic route closure
 Route::get('/greeting', function () {
     return 'Hello World';
 });
 
-// Route direct view shortcut
+//Route direct view shortcut
 Route::view('/welcome', 'welcome');
 
-// Route to controller class
+//Route to controller class
 use App\Http\Controllers\UserController;
 Route::get('/user', [UserController::class, 'index']);
 
-// Route only for specific HTTP verbs
+//Route only for specific HTTP verbs
 Route::match(['get', 'post'], '/', function () {
     //
 });
 
-// Route for all verbs
+//Route for all verbs
 Route::any('/', function () {
     //
 });
 
-// Route Redirect
+//Route Redirect
 Route::redirect('/clients', '/customers');
 
 
-// Route Parameters
+//Route Parameters
 Route::get('/user/{id}', function ($id) {
     return 'User '.$id;
 });
 
-// Optional Parameter
+//Optional Parameter
 Route::get('/user/{name?}', function ($name = 'John') {
     return $name;
 });
 
-// Named Route
+//Named Route
 Route::get(
     '/user/profile',
     [UserProfileController::class, 'show']
 )->name('profile');
 
-// Resource
+//Resource
 Route::resource('photos', PhotoController::class);
 
 GET /photos index   photos.index
@@ -294,10 +294,10 @@ GET /photos/{photo}/edit    edit    photos.edit
 PUT/PATCH   /photos/{photo} update  photos.update
 DELETE  /photos/{photo} destroy photos.destroy
 
-// Nested resource
+//Nested resource
 Route::resource('photos.comments', PhotoCommentController::class);
 
-// Partial resource
+//Partial resource
 Route::resource('photos', PhotoController::class)->only([
     'index', 'show'
 ]);
@@ -306,32 +306,32 @@ Route::resource('photos', PhotoController::class)->except([
     'create', 'store', 'update', 'destroy'
 ]);
 
-// URL with route name
+//URL with route name
 $url = route('profile', ['id' => 1]);
 
-// Generating Redirects...
+//Generating Redirects...
 return redirect()->route('profile');
 
-// Route Prefix group
+//Route Prefix group
 Route::prefix('admin')->group(function () {
     Route::get('/users', function () {
-        // Matches The "/admin/users" URL
+        //Matches The "/admin/users" URL
     });
 });
 
-// Route model binding
+//Route model binding
 use App\Models\User;
 Route::get('/users/{user}', function (User $user) {
     return $user->email;
 });
 
-// Route model binding (other than id)
+//Route model binding (other than id)
 use App\Models\User;
 Route::get('/posts/{post:slug}', function (Post $post) {
     return view('post', ['post' => $post]);
 });
 
-// Route fallback
+//Route fallback
 Route::fallback(function () {
     //
 });
@@ -339,10 +339,10 @@ Route::fallback(function () {
 
 ####Cache
 ````
-// Route Caching
+//Route Caching
 php artisan route:cache
 
-// Retrieve & Store (key, duration, content)
+//Retrieve & Store (key, duration, content)
 $users = Cache::remember('users', now()->addMinutes(5), function () {
     return DB::table('users')->get();
 });
@@ -350,7 +350,7 @@ $users = Cache::remember('users', now()->addMinutes(5), function () {
 
 ####Controllers
 ````
-// Set validation rules 
+//Set validation rules 
 protected $rules = [
     'title' => 'required|unique:posts|max:255',
     'name' => 'required|min:6',
@@ -358,13 +358,13 @@ protected $rules = [
     'publish_at' => 'nullable|date',
 ];
 
-// Validate
+//Validate
 $validatedData = $request->validate($rules)
 
-// Show 404 error page
+//Show 404 error page
 abort(404, 'Sorry, Post not found')
 
-// Controller CRUD exemple
+//Controller CRUD exemple
 Class ProductsController
 {
 
@@ -372,7 +372,7 @@ Class ProductsController
    {
        $products = Product::all();
 
-       // app/resources/views/products/index.blade.php
+       //app/resources/views/products/index.blade.php
        return view('products.index', ['products', $products]); 
    }
 
@@ -421,10 +421,10 @@ Class ProductsController
    }
 }
 
-// Query Params www.demo.html?name=mike
+//Query Params www.demo.html?name=mike
 request()->name //mike
 
-// Form data (or default value)
+//Form data (or default value)
 request()->input('email', 'no@email.com')
 ````
 
@@ -514,20 +514,20 @@ DB::delete('delete from users where id = 1');
 
 ####Helpers
 ````
-// Display variable content and kill execution
+//Display variable content and kill execution
 dd($products)
 
-// Create a Laravel collection from array.
+//Create a Laravel collection from array.
 $collection = collect($array);
 
-// Sort by description ascending
+//Sort by description ascending
 $ordered_collection = $collection->orderBy(‘description’);
 
-// Reset numbering value 
+//Reset numbering value 
 $ordered_collection = $ordered_collection->values()->all();
 
 
-// Return project full Path 
+//Return project full Path 
 app\ : app_path();
 resources\ : resource_path();
 database\ :database_path();             
@@ -535,72 +535,72 @@ database\ :database_path();
 
 ####Flash & Session
 ````
-// Flash (only next request)
+//Flash (only next request)
 $request->session()->flash('status', 'Task was successful!');
 
-// Flash with redirect
+//Flash with redirect
 return redirect('/home')->with('success' => 'email sent!');
 
-// Set Session
+//Set Session
 $request->session()->put('key', 'value');
 
-// Get session
+//Get session
 $value = session('key');
 If session: if ($request->session()->has('users'))
 
-// Delete session
+//Delete session
 $request->session()->forget('key');
 
-// Display flash in template 
+//Display flash in template 
 @if (session('message')) {{ session('message') }} @endif
 ````
 
 ####HTTP Client
 ````
-// Use package
+//Use package
 use Illuminate\Support\Facades\Http;
 
 //Http get
 $response = Http::get('www.thecat.com')
 $data = $response->json()
 
-// Http get with query
+//Http get with query
 $res = Http::get('www.thecat.com', ['param1', 'param2'])
 
-// Http post
+//Http post
 $res = Http::post('http://test.com', ['name' => 'Steve','role' => 'Admin']);
 
-// Bearer 
+//Bearer 
 $res = Http::withToken('123456789')->post('http://the.com', ['name' => 'Steve']);
 
-// Headers
+//Headers
 $res = Http::withHeaders(['type'=>'json'])->post('http://the.com', ['name' => 'Steve']);
 ````
 
 ####Storage (helper class to store files locally or in the cloud)
 ````
-// Public config: Local storage/app/public
+//Public config: Local storage/app/public
 Storage::disk('public')->exists('file.jpg')) 
-// S3 config: storage: Amazon cloud ex:
+//S3 config: storage: Amazon cloud ex:
 Storage::disk('s3')->exists('file.jpg')) 
 
-// Make the Public config available from the web 
+//Make the Public config available from the web 
 php artisan storage:link
 
-// Get or put file in the storage folder
+//Get or put file in the storage folder
 use Illuminate\Support\Facades\Storage;
 Storage::disk('public')->put('example.txt', 'Contents');
 $contents = Storage::disk('public')->get('file.jpg'); 
 
-// Access files by generating a url
+//Access files by generating a url
 $url = Storage::url('file.jpg');
-// or by direct path to public config
+//or by direct path to public config
 <img src={{ asset('storage/image1.jpg') }}/>
 
-// Delete file
+//Delete file
 Storage::delete('file.jpg');
 
-// Trigger download
+//Trigger download
 Storage::disk('public')->download('export.csv');
 ````
 
@@ -617,7 +617,7 @@ $ php artisan migrate
 ####Rest API (create a Rest API endpoint)
 #####API Routes (All api routes will be prefix with 'api/')
 ````
-// routes/api.php
+//routes/api.php
 Route::get('products', [App\Http\Controllers\ProductsController::class, 'index']);
 Route::get('products/{product}', [App\Http\Controllers\ProductsController::class, 'show']);
 Route::post('products', [App\Http\Controllers\ProductsController::class, 'store']);

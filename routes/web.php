@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     });
 
     include 'admin/category.php';
+    include 'admin/product.php';
     include 'admin/users.php';
 
     //logout
